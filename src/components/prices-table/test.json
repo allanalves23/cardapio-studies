@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_category_tests",
+  "info": {
+    "displayName": "Price Table Item",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Description": {
+      "type": "string"
+    },
+    "Value": {
+      "type": "decimal"
+    },
+    "Recurrence": {
+      "type": "decimal"
+    }
+  }
+}

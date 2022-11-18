@@ -1,0 +1,54 @@
+{
+  "kind": "collectionType",
+  "collectionName": "services",
+  "info": {
+    "singularName": "service",
+    "pluralName": "services",
+    "displayName": "Service",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255,
+      "minLength": 3,
+      "unique": true
+    },
+    "ServiceKey": {
+      "type": "uid",
+      "required": true
+    },
+    "products": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product.product",
+      "inversedBy": "services"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "Pai",
+        "Incluso",
+        "Adicional"
+      ],
+      "default": "Pai",
+      "required": true
+    },
+    "services": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::service.service"
+    },
+    "prices_tables": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::prices-table.prices-table",
+      "mappedBy": "service"
+    }
+  }
+}
