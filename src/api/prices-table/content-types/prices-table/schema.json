@@ -28,6 +28,12 @@
     },
     "Inicial": {
       "type": "datetime"
+    },
+    "plan": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::plan.plan",
+      "inversedBy": "prices_tables"
     }
   }
 }

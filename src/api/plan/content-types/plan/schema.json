@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "plans",
+  "info": {
+    "singularName": "plan",
+    "pluralName": "plans",
+    "displayName": "Plan",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Description": {
+      "type": "string"
+    },
+    "Have_Price": {
+      "type": "boolean"
+    },
+    "Active": {
+      "type": "boolean"
+    },
+    "services": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::service.service"
+    },
+    "prices_tables": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::prices-table.prices-table",
+      "mappedBy": "plan"
+    }
+  }
+}

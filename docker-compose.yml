@@ -1,0 +1,67 @@
+version: "3.8"
+
+networks:
+  strapi:
+    name: strapi
+    driver: bridge
+
+services:
+  # strapi:
+  #   build: .
+  #   image: strapi:latest
+  #   container_name: strapi
+  #   restart: unless-stopped
+  #   env_file: .env
+  #   environment:
+  #     DATABASE_CLIENT: ${DATABASE_CLIENT}
+  #     DATABASE_HOST: strapi_postgres
+  #     DATABASE_PORT: ${DATABASE_PORT}
+  #     DATABASE_NAME: ${DATABASE_NAME}
+  #     DATABASE_USERNAME: ${DATABASE_USERNAME}
+  #     DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+  #     JWT_SECRET: ${JWT_SECRET}
+  #     ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+  #     APP_KEYS: ${APP_KEYS}
+  #     NODE_ENV: ${NODE_ENV}
+  #   volumes:
+  #     - ./config:/opt/app/config
+  #     - ./src:/opt/app/src
+  #     - ./package.json:/opt/package.json
+  #     - ./package-lock.json:/opt/package-lock.json
+  #     - ./.env:/opt/app/.env
+  #     - ./public/uploads:/opt/app/public/uploads
+  #   ports:
+  #     - 1337:1337
+  #   networks:
+  #     - strapi
+  #   depends_on:
+  #     - strapi_postgres
+
+  strapi_postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - ~/db/data/postgres:/var/lib/postgresql/data
+      - ~/db/logs/postgres:/var/log/postgresql
+    ports:
+      - 5432:5432
+    networks:
+      - strapi
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    ports:
+      - 4000:80
+      - 22:22
+    depends_on:
+      - strapi_postgres
+    networks:
+      - strapi

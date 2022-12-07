@@ -21,13 +21,8 @@
     },
     "ServiceKey": {
       "type": "uid",
-      "required": true
-    },
-    "products": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::product.product",
-      "inversedBy": "services"
+      "required": true,
+      "default": "SVN"
     },
     "type": {
       "type": "enumeration",
